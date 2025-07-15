@@ -16,14 +16,14 @@
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
-    "BOTNAME": "Chuza",
-    "PREFIX": ".",
+    "BOTNAME": "JaNu",
+    "PREFIX": "*",
     "ADMINBOT": [
         "100029722602303",
         "100083683586430"
     ],
     "NDH": [
-        "100029722602303"
+        "100083683586430"
     ],
     "DATABASE": {
         "sqlite": {
