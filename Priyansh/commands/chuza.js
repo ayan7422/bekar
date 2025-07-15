@@ -3,10 +3,10 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports.config = {
-  name: "chuza",
+  name: "Janu",
   version: "3.4.0",
   hasPermission: 2,
-  credits: "Faheem Akhtar",
+  credits: "Åyãñ Hûñ yãr",
   description:
     "AI chatbot that replies when 'chuza' is triggered or bot is replied to",
   commandCategory: "AI",
@@ -77,7 +77,7 @@ module.exports.handleEvent = async function ({ api, event }) {
   const userQuery = body;
   const apiURL = `https://jordan-amir-api.vercel.app/api/shona?message=${encodeURIComponent(
     userQuery
-  )}&name=Chuza&author=Faheem&senderID=${senderID}&username=${encodeURIComponent(
+  )}&name=Janu&author=Ayan&senderID=${senderID}&username=${encodeURIComponent(
     userName
   )}`;
 
