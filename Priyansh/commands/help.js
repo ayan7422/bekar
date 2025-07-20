@@ -155,7 +155,7 @@ module.exports.run = function ({ api, event, args, getText }) {
       arrayInfo.length / numberOfOnePage
     )})\n\nYou can use ${
       global.config.PREFIX
-    }help all to see all commands\nMade By The Faheem`;
+    }help all to see all commands\nMade By The Åyãñ Hûñ yãr`;
 
     return api.sendMessage(
       siu + "\n\n" + msg + text,
