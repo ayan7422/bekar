@@ -373,7 +373,7 @@ module.exports.handleEvent = async function ({
     "ywr koi bachi hi set krwa do Ayan ka sath please 🥺💔",
     "g janu ap na q yad keya huma😒",
     "jaan asy na bulya kro sub shak kry ga😝💗",
-    "Faheem Mera owner ha osy bhi koi bachi yes krwa ywr🙂💔",
+    "Ayan Mera owner ha osy bhi koi bachi yes krwa ywr🙂💔",
     "oye ma tum se payar krta hon tujy pta ha😁💘",
     "i love meri jaan",
     "Faheem bhot payra ha ywr tum ko pta ha 🥺❤",
@@ -438,13 +438,13 @@ module.exports.handleEvent = async function ({
   }
 
   if (
-    event.body.toLowerCase() == "Faheem" ||
-    event.body.toLowerCase() == "faheem"
+    event.body.toLowerCase() == "Ayan" ||
+    event.body.toLowerCase() == "ayan"
   ) {
     return api.sendMessage("Yes My Love <3", threadID);
   }
-  if (event.body.toLowerCase() == "Ok" || event.body.toLowerCase() == "Okay") {
-    return api.sendMessage("KYa Ok🙄 Haan", threadID);
+  if (event.body.toLowerCase() == "raj" || event.body.toLowerCase() == "Raj") {
+    return api.sendMessage("Haan kiya baat hai bolo ", threadID);
   }
 
   if (event.body.toLowerCase() == "G" || event.body.toLowerCase() == "Han G") {
@@ -523,11 +523,11 @@ module.exports.handleEvent = async function ({
   }
 
   if (
-    event.body.toLowerCase() == "love" ||
-    event.body.toLowerCase() == "Pyaar"
+    event.body.toLowerCase() == "doll" ||
+    event.body.toLowerCase() == "doll"
   ) {
     return api.sendMessage(
-      "Pyaar wo to A name ki larki sa karta hon ma 😘",
+      "chal hato kabhi phle masoom larki nhi dekhi kiya😁",
       threadID
     );
   }
