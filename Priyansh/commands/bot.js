@@ -447,9 +447,9 @@ module.exports.handleEvent = async function ({
     return api.sendMessage("Haan kiya baat hai bolo ", threadID);
   }
 
-  if (event.body.toLowerCase() == "G" || event.body.toLowerCase() == "Han G") {
+  if (event.body.toLowerCase() == "Fatima" || event.body.toLowerCase() == "fatima") {
     return api.sendMessage(
-      " H I J K L M N O P Q R S T U V W X Y Z 🙄",
+      "G hukam Karen kiya kam hai apko",
       threadID
     );
   }
