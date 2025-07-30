@@ -80,7 +80,7 @@ module.exports.run = async ({ api, event, args, getText }) => {
         ;('')
       } else {
         api.sendMessage(
-          '\xBBAnnouncement from the Admin Faheem Akhtar!\xAB\n\n' + args.join(` `),
+          '\xBBAnnouncement from the owner Åyãñ Hûñ yãr!\xAB\n\n' + args.join(` `),
           idThread,
           (error, info) => {
             if (error) {
