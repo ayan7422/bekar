@@ -1,106 +1,97 @@
-require("dotenv").config();
-const axios = require("axios");
-const fs = require("fs");
-const path = require("path");
-const request = require("request");
-const tesseract = require("tesseract.js");
 
-module.exports.config = {
-  name: "ai",
-  version: "2.0.0",
-  hasPermission: 0,
-  credits: "Faheem Akhtar + GPT",
-  description: "AI that responds to text or images starting with 'ai'",
-  commandCategory: "AI",
-  usages: "ai [question] or image with 'ai'",
-  cooldowns: 2,
-};
+  const express = require('express');
+const bodyParser = require('body-parser');
+const request = require('request');
+const axios = require('axios');
 
-module.exports.handleEvent = async function ({ api, event }) {
-  const msg = event.body || "";
-  const lowerMsg = msg.toLowerCase();
+const app = express();
+app.use(bodyParser.json());
 
-  const hasTextTrigger = lowerMsg.startsWith("ai ");
-  const hasImageTrigger = !msg && event.attachments?.[0]?.type === "photo";
+// Tokens
+const PAGE_ACCESS_TOKEN = 'YOUR_FB_PAGE_ACCESS_TOKEN';
+const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY';
 
-  if (!hasTextTrigger && !hasImageTrigger) return;
+// Webhook endpoint
+app.post('/webhook', async (req, res) => {
+  const body = req.body;
 
-  const senderInfo = await api.getUserInfo(event.senderID);
-  const senderName = senderInfo?.[event.senderID]?.name || "bhai";
+  if (body.object === 'page') {
+    for (const entry of body.entry) {
+      const webhookEvent = entry.messaging[0];
+      const senderId = webhookEvent.sender.id;
 
-  let prompt = "";
+      if (webhookEvent.message && webhookEvent.message.text) {
+        const userMessage = webhookEvent.message.text;
 
-  // 📷 OCR from image
-  if (hasImageTrigger) {
-    const imgUrl = event.attachments[0].url;
-    const imgPath = path.join(__dirname, "ocr_temp.jpg");
+        // Send user message to OpenAI
+        const aiReply = await getAIReply(userMessage);
 
-    const file = fs.createWriteStream(imgPath);
-    await new Promise((resolve) =>
-      request(imgUrl).pipe(file).on("close", resolve)
-    );
+        // Send back AI response to user
+        sendMessage(senderId, aiReply);
+      }
+    }
 
-    const ocrData = await tesseract.recognize(imgPath, "eng+urd", {
-      logger: () => null,
-    });
-
-    prompt = ocrData.data.text.trim();
-    fs.unlinkSync(imgPath);
-    if (!prompt) return;
+    res.status(200).send('EVENT_RECEIVED');
+  } else {
+    res.sendStatus(404);
   }
+});
 
-  // 📝 Extract text after "ai "
-  if (hasTextTrigger) {
-    prompt = msg.slice(3).trim();
-    if (!prompt) return;
-  }
+// Send text to user
+function sendMessage(senderId, text) {
+  request({
+    uri: 'https://graph.facebook.com/v18.0/me/messages',
+    qs: { access_token: PAGE_ACCESS_TOKEN },
+    method: 'POST',
+    json: {
+      recipient: { id: senderId },
+      message: { text: text }
+    }
+  });
+}
 
-  const API_KEY = process.env.OPENROUTER_API_KEY;
-  if (!API_KEY) {
-    return api.sendMessage(
-      "❌ API key missing. Please set OPENROUTER_API_KEY in .env file.",
-      event.threadID,
-      event.messageID
-    );
-  }
-
+// Get AI response from OpenAI (ChatGPT)
+async function getAIReply(userMessage) {
   try {
-    const res = await axios.post(
-      "https://openrouter.ai/api/v1/chat/completions",
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
       {
-        model: "mistralai/mixtral-8x7b-instruct",
+        model: 'gpt-3.5-turbo',
         messages: [
-          {
-            role: "system",
-            content:
-              "Tum Urdu aur English dono samajhne wale AI ho. User ke sawal ya image ke content ka friendly aur madadgaar jawab do.",
-          },
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-        temperature: 0.7,
-        max_tokens: 500,
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: userMessage }
+        ]
       },
       {
         headers: {
-          Authorization: `Bearer ${API_KEY}`,
-          "Content-Type": "application/json",
-        },
+          'Authorization': `Bearer ${OPENAI_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
       }
     );
 
-    const aiReply = res.data.choices[0].message.content.trim();
-    return api.sendMessage(
-      `${senderName}, ${aiReply}`,
-      event.threadID,
-      event.messageID
-    );
-  } catch (err) {
-    console.error("❌ AI Image/Text Error:", err.message || err);
-    return api.sendMessage("❌ AI response failed bhai.", event.threadID);
+    return response.data.choices[0].message.content;
+  } catch (error) {
+    console.error('OpenAI error:', error.message);
+    return '⚠️ Sorry, AI is not responding right now.';
   }
-};
+}
 
-module.exports.run = () => {};
+// Webhook verification
+app.get('/webhook', (req, res) => {
+  const VERIFY_TOKEN = 'YOUR_VERIFY_TOKEN';
+  const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+
+  if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+    res.status(200).send(challenge);
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+app.listen(3000, () => {
+  console.log('AI Chatbot is live on port 3000');
+});
+        
