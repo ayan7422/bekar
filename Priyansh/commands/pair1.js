@@ -2,7 +2,7 @@ module.exports.config = {
     name: "pair1",
     version: "1.0.1",
     hasPermssion: 0,
-    credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
+    credits: "JaNu ☢️_𖣘 -𝐁𝐎𝐓 ",
     description: "Pair with people in the group",
     commandCategory: "tình yêu",
     cooldowns: 5,
@@ -78,4 +78,4 @@ module.exports.run = async function({ api, event, args, Users, Threads, Currenci
         var gender = sex == 2 ? "Male🧑" : sex == 1 ? "Female👩‍🦰" : "Tran Duc Bo";
 var one = senderID, two = id;
     return makeImage({ one, two }).then(path => api.sendMessage({ body:`Congratulations ${namee} was paired with ${name}\nPair odds are: ${tle}`, mentions: arraytag, attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
-  }
+    }
