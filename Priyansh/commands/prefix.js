@@ -62,11 +62,11 @@ module.exports.handleEvent = async ({ event, api, Threads }) => {
     if ((body === i.toUpperCase()) | (body === i) | (str === body)) {
       const prefix = threadSetting.PREFIX || global.config.PREFIX;
       if (data.PREFIX == null) {
-        return out(`This Is My Prefix ⇉ [ ${prefix} ]\n💝🥀𝐎𝐖𝐍𝐄𝐑:- ☞Faheem Akhtar\n🖤𝚈𝚘𝚞 𝙲𝚊𝚗 𝙲𝚊𝚕𝚕 𝙷𝚒𝚖 The Faheem🖤\n😳𝐇𝐢𝐬 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐢𝐝🤓:- ☞ whttps://www.facebook.com/faheemakhtar001\n
-👋For Any Kind Of Help Contact On Telegram  Username 👉 @Pfaheem_akhtar0001😇`);
+        return out(`This Is My Prefix ⇉ [ ${prefix} ]\n💝🥀𝐎𝐖𝐍𝐄𝐑:- ☞ Åyãñ Hûñ yãr\n🖤𝚈𝚘𝚞 𝙲𝚊𝚗 𝙲𝚊𝚕𝚕 𝙷𝚒𝚖 The Ayan🖤\n😳𝐇𝐢𝐬 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐢𝐝🤓:- ☞ whttps://www.facebook.com/ayan.hun.yar.315237\n
+👋For Any Kind Of Help Contact On Telegram  Username 👉 @ayan7422😇`);
       } else
         return out(
-          "️️️️️️️️️️️️️️️️️️️️️️️️️️️This Is My Prefix ⇉ [ ${prefix} ]  \n💝🥀𝐎𝐖𝐍𝐄𝐑:- ☞Faheem Akhtar☜ 💫\n🖤𝚈𝚘𝚞 𝙲𝚊𝚗 𝙲𝚊𝚕𝚕 The Faheem🖤\n😳𝐇𝐢𝐬 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐢𝐝🤓:- ☞ https://www.facebook.com/faheemakhtar001\n👋For Any Kind Of Help Contact On Telegram  Username 👉 @faheem_akhtar0001😇" +
+          "️️️️️️️️️️️️️️️️️️️️️️️️️️️This Is My Prefix ⇉ [ ${prefix} ]  \n💝🥀𝐎𝐖𝐍𝐄𝐑:- ☞ Åyãñ Hûñ yãr☜ 💫\n🖤𝚈𝚘𝚞 𝙲𝚊𝚗 𝙲𝚊𝚕𝚕 The Åyãñ 🖤\n😳𝐇𝐢𝐬 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐢𝐝🤓:- ☞ https://www.facebook.com/ayan.hun.yar.315237\n👋For Any Kind Of Help Contact On Telegram  Username 👉 @ayan7423😇" +
             data.PREFIX
         );
     }
