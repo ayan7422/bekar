@@ -443,13 +443,13 @@ module.exports.handleEvent = async function ({
   ) {
     return api.sendMessage("Yes My Love <3", threadID);
   }
-  if (event.body.toLowerCase() == "raj" || event.body.toLowerCase() == "Raj") {
-    return api.sendMessage("Haan kiya baat hai bolo ", threadID);
+  if (event.body.toLowerCase() == "kiran" || event.body.toLowerCase() == "kiran") {
+    return api.sendMessage("Han wohi kiran jo kojiiiiii hai  ", threadID);
   }
 
-  if (event.body.toLowerCase() == "Fatima" || event.body.toLowerCase() == "fatima") {
+  if (event.body.toLowerCase() == "Anaya" || event.body.toLowerCase() == "anaya") {
     return api.sendMessage(
-      "G hukam Karen kiya kam hai apko",
+      "Åyãñ ki beastie ",
       threadID
     );
   }
